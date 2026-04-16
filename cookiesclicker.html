@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coockie Clicker</title>
@@ -10,13 +11,13 @@
     <div class="content-center text-center">
       <h1 id="number">01</h1>
       <button
-        onclick="increase()"
-        class="cursor-pointer focus:outline-none active:scale-90"
+        onclick="punch()"
+        class="cursor-pointer focus:outline-none active:scale-90 hover:scale-95"
       >
         <img
-          id="dummy-image"
+          id="dummyImage"
           class="w-100 transition-all duration-100"
-          src="/cookiesclicker/src/2d_dummy_sprite_by_retronc_di9bip6-fullview.png"
+          src="./src/dummy.png"
           alt="Cookies"
         />
       </button>
@@ -30,6 +31,6 @@
       </div>
     </div>
   </body>
-  <script src="/cookiesclicker/script.js"></script>
-  <script src="/cookiesclicker/soundscript.js"></script>
+  <script src="script.js"></script>
+  <script src="./soundscript.js"></script>
 </html>
