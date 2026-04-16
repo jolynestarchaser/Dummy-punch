@@ -39,6 +39,7 @@ function startBuffPunch() {
       punchCount += autoPunchSpeed;
 
       // เล่นเสียงและ Animation
+      oraOra.play();
       dmgSound.currentTime = 0;
       dmgSound.play();
       applyDamageStyle();
@@ -48,21 +49,20 @@ function startBuffPunch() {
 
       updateDisplay();
     }
-  }, 1000); // รัวทุก 0.1 วินาที
+  }, 500); // รัวทุก 0.1 วินาที
 
   // 2. สั่งให้ "หยุดรัว" เมื่อครบ 1000ms (1 วินาที)
   setTimeout(() => {
     clearInterval(rapidPunch); // สั่งทำลายลูปการรัวทิ้ง
     console.log("Buff Ended!");
-  }, 30000);
+  }, 5000);
 }
 
 function upgrade() {
   if (punchCount >= 20) {
     punchCount -= 20;
     autoPunchSpeed += 1;
-    dmgSound.currentTime = 0;
-    dmgSound.play();
+    startBuffPunch();
     updateDisplay();
   }
 }
