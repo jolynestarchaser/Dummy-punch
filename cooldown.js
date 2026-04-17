@@ -3,7 +3,7 @@ let isBuffOnCooldown = false; // ตัวแปรเช็กสถานะ (
 function useBuff() {
   // 1. เช็กก่อนว่าติดคูลดาวน์อยู่ไหม?
   if (isBuffOnCooldown) {
-    console.log("ใจเย็นๆ หมัดยังไม่ฟื้นพลัง!");
+    consoleg.log("ใจเย็นๆ หมัดยังไม่ฟื้นพลัง!");
     return; // จบฟังก์ชันทันที ไม่ให้ทำงานต่อ
   }
 
