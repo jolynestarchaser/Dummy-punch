@@ -116,7 +116,7 @@
       ></div>
 
       <button
-        onclick="punch()"
+        onclick="punch(event)"
         class="relative transform active:scale-95 transition-transform cursor-pointer"
       >
         <img
@@ -129,7 +129,7 @@
     </div>
     <div class="mt-12 flex gap-4">
       <button
-        onclick="steelTempest()"
+        onclick="steelTempest(event)"
         id="qButton"
         class="px-6 group relative w-auto h-16 bg-blue-600 rounded-lg border-b-4 border-blue-800 active:border-b-0 active:translate-y-1 transition-all overflow-hidden"
       >
@@ -141,14 +141,14 @@
       </button>
 
       <button
-        onclick="oraPunch()"
+        onclick="oraPunch(event)"
         id="oraButton"
         class="px-6 w-auto h-16 bg-gray-600 opacity-50 rounded-lg border-b-4 border-purple-800 active:border-b-0 active:translate-y-1 font-bold"
       >
         ORA / 20
       </button>
       <button
-        onclick="mudaPunch()"
+        onclick="mudaPunch(event)"
         id="mudaButton"
         class="px-6 w-auto h-16 bg-gray-600 opacity-50 rounded-lg border-b-4 border-purple-800 active:border-b-0 active:translate-y-1 font-bold"
       >
@@ -158,5 +158,5 @@
   </body>
   <script src="script.js"></script>
   <script src="./soundscript.js"></script>
-  <script scr="./cooldown.js"></script>
+  <script src="./cooldown.js"></script>
 </html>

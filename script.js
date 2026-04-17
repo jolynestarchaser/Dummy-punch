@@ -10,9 +10,12 @@ const damagedImage = "./src/dummy_dmg.png";
 
 //DMG
 
-function applyDamageStyle() {
+function applyDamageStyle(event) {
   dummy.src = damagedImage;
   dummy.classList.add("scale-110", "animate-hit");
+
+  if (event) showFloatingText("+1", event, "text-yellow-400");
+
   increase();
 }
 
@@ -21,12 +24,11 @@ function resetStyle() {
   dummy.classList.remove("scale-110", "animate-hit");
 }
 
-function punch() {
-  applyDamageStyle();
+function punch(event) {
+  applyDamageStyle(event);
   clickSound.currentTime = 0;
   clickSound.play();
-
-  setTimeout(resetStyle, 100); //
+  setTimeout(resetStyle, 100);
 }
 
 function increase() {
@@ -102,9 +104,12 @@ function startMuda() {
 
 // Upgrade
 
-function oraPunch() {
+function oraPunch(event) {
   if (punchCount < 20 || isOraCooldown) {
-    if (isOraCooldown) (coolDown.play(), (coolDown.currentTime = 0));
+    if (isOraCooldown)
+      (coolDown.play(),
+        (coolDown.currentTime = 0),
+        showFloatingText("Cooldown!!", event, "text-red-500"));
     else {
       disable.play();
       disable.currentTime = 0;
@@ -124,9 +129,12 @@ function oraPunch() {
   }, 10000);
 }
 
-function mudaPunch() {
+function mudaPunch(event) {
   if (punchCount < 30 || isMudaCooldown) {
-    if (isMudaCooldown) (coolDown.play(), (coolDown.currentTime = 0));
+    if (isMudaCooldown)
+      (coolDown.play(),
+        (coolDown.currentTime = 0),
+        showFloatingText("Cooldown!!", event, "text-red-500"));
     else {
       disable.play();
       disable.currentTime = 0;
@@ -147,13 +155,12 @@ function mudaPunch() {
 }
 
 //Yasuo
-function steelTempest() {
+function steelTempest(event) {
+  // เพิ่ม event
   if (isQCooldown) {
-    if (isMudaCooldown);
-    else {
-      coolDown.play();
-      coolDown.currentTime = 0;
-    }
+    coolDown.currentTime = 0;
+    coolDown.play();
+    showFloatingText("Cooldown!!", event, "text-red-500"); // โชว์เตือนคูลดาวน์
     return;
   }
   isQCooldown = true;
@@ -162,30 +169,33 @@ function steelTempest() {
 
   if (qStacks === 4) {
     punchCount += 7;
+    showFloatingText("Sorye ge ton yasuo! +7", event, "text-blue-400 text-3xl"); // ตัวใหญ่พิเศษ
     dummy.classList.add("animate-ping");
+    r.currentTime = 0;
     r.play();
-    bigSlash.play();
     bigSlash.currentTime = 0;
+    bigSlash.play();
     qStacks = 0;
   } else {
     punchCount += 1;
+    showFloatingText("+1", event, "text-white");
     if (qStacks === 1) {
-      q1.play();
       q1.currentTime = 0;
-      slash1.play();
+      q1.play();
       slash1.currentTime = 0;
+      slash1.play();
     }
     if (qStacks === 2) {
-      q2.play();
       q2.currentTime = 0;
-      slash2.play();
+      q2.play();
       slash2.currentTime = 0;
+      slash2.play();
     }
     if (qStacks === 3) {
-      q3.play();
       q3.currentTime = 0;
-      slash1.play();
+      q3.play();
       slash1.currentTime = 0;
+      slash1.play();
     }
   }
 
@@ -234,4 +244,23 @@ function updateDisplay() {
     mudaBtn.classList.remove("bg-gray-600", "opacity-50", "cursor-not-allowed");
     mudaBtn.classList.add("bg-orange-600", "hover:bg-orange-700");
   }
+}
+
+function showFloatingText(message, event, colorClass = "text-white") {
+  const text = document.createElement("div");
+  text.innerText = message;
+
+  // ใส่ Class Tailwind 4 ที่คุณมีใน index.html
+  text.className = `absolute pointer-events-none font-black text-2xl z-50 ${colorClass} animate-float-up`;
+
+  // ตั้งตำแหน่งตามเมาส์
+  text.style.left = `${event.pageX}px`;
+  text.style.top = `${event.pageY}px`;
+
+  document.body.appendChild(text);
+
+  // ลบทิ้งเมื่อ Animation จบ
+  setTimeout(() => {
+    text.remove();
+  }, 1000);
 }
