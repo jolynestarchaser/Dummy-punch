@@ -8,3 +8,4 @@ const q2 = new Audio("./src/Yasuo/Yasuo_Original_Q2_1.ogg");
 const q3 = new Audio("./src/Yasuo/Yasuo_Original_Q3_1.ogg");
 const r = new Audio("./src/Yasuo/Yasuo_Original_R_0.ogg");
 const oraWeapon = new Audio("./src/ora-one-hit.mp3");
+const coolDown = new Audio("./src/deny_cooldown.ogg");

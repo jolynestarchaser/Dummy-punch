@@ -3,22 +3,83 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
-      @layer utilities {
+      @theme {
+        /* --- รวม Animation ทั้งหมด --- */
+        --animate-hit: hit 0.15s ease-in-out;
+        --animate-shake: shake 0.1s ease-in-out infinite;
+        --animate-float-up: floatUp 1s ease-out forwards;
+        --animate-explode: explode 0.5s ease-out forwards;
+        --animate-heavy-hit: heavyHit 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+        /* --- จังหวะการเคลื่อนที่ (Keyframes) --- */
+
+        /* 1. แรงกระแทกปกติ (ตอนต่อยธรรมดา) */
+        @keyframes hit {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1) rotate(2deg);
+          }
+        }
+
+        /* 2. สั่นรัวๆ (ตอนใช้ Ora / Muda) */
         @keyframes shake {
           0%,
           100% {
             transform: translateX(0);
           }
           25% {
-            transform: translateX(-5px) rotate(-2deg);
+            transform: translateX(-4px) rotate(-1deg);
           }
           75% {
-            transform: translateX(5px) rotate(2deg);
+            transform: translateX(4px) rotate(1deg);
           }
         }
 
-        .animate-shake {
-          animation: shake 0.1s ease-in-out infinite;
+        /* 3. ตัวเลขดาเมจลอยขึ้น (Floating Text) */
+        @keyframes floatUp {
+          0% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-60px);
+            opacity: 0;
+          }
+        }
+
+        /* 4. เอฟเฟกต์ระเบิด (สำหรับท่า HASAGI หรือปิดท้าย Combo) */
+        @keyframes explode {
+          0% {
+            transform: scale(1);
+            filter: brightness(1) blur(0px);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.5);
+            filter: brightness(2) blur(2px);
+            opacity: 0.8;
+          }
+          100% {
+            transform: scale(2);
+            filter: brightness(3) blur(10px);
+            opacity: 0;
+          }
+        }
+
+        /* 5. กระแทกหนัก (ถอยหลังแล้วเด้งกลับ) */
+        @keyframes heavyHit {
+          0% {
+            transform: scale(1) translateX(0);
+          }
+          30% {
+            transform: scale(0.9) translateX(-20px);
+          }
+          100% {
+            transform: scale(1) translateX(0);
+          }
         }
       }
     </style>
