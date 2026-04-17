@@ -4,6 +4,8 @@ const dummy = document.querySelector("#dummyImage");
 const idleImage = "./src/dummy.png";
 const damagedImage = "./src/dummy_dmg.png";
 
+//DMG
+
 function applyDamageStyle() {
   dummy.src = damagedImage;
   dummy.classList.add("scale-110", "animate-hit");
@@ -32,8 +34,9 @@ function increase() {
   updateDisplay();
 }
 
+// Buff
+
 function startBuffPunch() {
-  // 1. ตั้งค่าความเร็วในการรัว (เช่น ทุกๆ 100ms ต่อยหนึ่งครั้ง)
   const rapidPunch = setInterval(() => {
     if (autoPunchSpeed > 0) {
       punchCount += autoPunchSpeed;
@@ -44,19 +47,36 @@ function startBuffPunch() {
       dmgSound.play();
       applyDamageStyle();
 
-      // สั่ง resetStyle หลังจาก Animation จบ (สมมติว่าใช้เวลา 50ms ในการรัว)
       setTimeout(resetStyle, 100);
 
       updateDisplay();
     }
-  }, 500); // รัวทุก 0.1 วินาที
+  }, 250);
 
-  // 2. สั่งให้ "หยุดรัว" เมื่อครบ 1000ms (1 วินาที)
   setTimeout(() => {
-    clearInterval(rapidPunch); // สั่งทำลายลูปการรัวทิ้ง
+    clearInterval(rapidPunch);
     console.log("Buff Ended!");
   }, 5000);
 }
+
+function startPoison() {
+  const poison = setInterval(() => {
+    if (autoPunchSpeed > 0) {
+      punchCount += autoPunchSpeed;
+
+      // เล่นเสียงและ Animation
+      dmgSound.currentTime = 0;
+      dmgSound.play();
+      applyDamageStyle();
+
+      setTimeout(resetStyle, 100);
+
+      updateDisplay();
+    }
+  }, 1000);
+}
+
+// Upgrade
 
 function upgrade() {
   if (punchCount >= 20) {
@@ -64,8 +84,25 @@ function upgrade() {
     autoPunchSpeed += 1;
     startBuffPunch();
     updateDisplay();
+  } else {
+    disable.play();
+    disable.currentTime = 0;
   }
 }
+
+function upgrade2() {
+  if (punchCount >= 30) {
+    punchCount -= 30;
+    autoPunchSpeed += 1;
+    startPoison();
+    updateDisplay();
+  } else {
+    disable.play();
+    disable.currentTime = 0;
+  }
+}
+
+// Display
 
 function updateDisplay() {
   document.querySelector("#number").textContent = punchCount;
