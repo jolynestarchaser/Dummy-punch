@@ -148,8 +148,14 @@ function mudaPunch() {
 
 //Yasuo
 function steelTempest() {
-  if ((isQCooldown = true)) return; // ติดคูลดาวน์ 2 วิ กดไม่ได้
-
+  if (isQCooldown) {
+    if (isMudaCooldown);
+    else {
+      coolDown.play();
+      coolDown.currentTime = 0;
+    }
+    return;
+  }
   isQCooldown = true;
   qStacks++;
   applyDamageStyle();
@@ -158,20 +164,28 @@ function steelTempest() {
     punchCount += 7;
     dummy.classList.add("animate-ping");
     r.play();
+    bigSlash.play();
+    bigSlash.currentTime = 0;
     qStacks = 0;
   } else {
     punchCount += 1;
     if (qStacks === 1) {
       q1.play();
       q1.currentTime = 0;
+      slash1.play();
+      slash1.currentTime = 0;
     }
     if (qStacks === 2) {
       q2.play();
       q2.currentTime = 0;
+      slash2.play();
+      slash2.currentTime = 0;
     }
     if (qStacks === 3) {
       q3.play();
       q3.currentTime = 0;
+      slash1.play();
+      slash1.currentTime = 0;
     }
   }
 
